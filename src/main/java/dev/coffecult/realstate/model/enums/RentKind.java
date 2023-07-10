@@ -1,5 +1,5 @@
 package dev.coffecult.realstate.model.enums;
 
 public enum RentKind {
-    EntirePlace, PrivateRoom, SharedRoom
+    Entire_Place, Private_Room, Shared_Room
 }
