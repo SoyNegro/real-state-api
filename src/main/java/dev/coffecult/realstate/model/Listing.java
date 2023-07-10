@@ -26,25 +26,25 @@ public class Listing {
 
     private short maximumStayMonths;
 
-    private short moveInWindow;
+    private short moveInWindow = 0;
 
-    private short currentOccupancy;
+    private short currentOccupancy = 0;
     @NotEmpty
     private String alias;
     @NotEmpty
     private List<String> galleryImagesUrl;
     @NotNull
     private Address address;
-
+    @NotNull
     private Pricing pricing;
 
     @NotEmpty
     private List<Cost> costs;
-
+    @NotNull
     private Facility facilities;
-
+    @NotNull
     private PreferredTenant preferredTenant;
-
+    @NotNull
     private Rule rules;
 
     @NotNull
