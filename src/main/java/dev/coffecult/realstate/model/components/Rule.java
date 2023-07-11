@@ -2,22 +2,20 @@ package dev.coffecult.realstate.model.components;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import dev.coffecult.realstate.model.enums.AllowedInProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.NotNull;
 
-@Getter
-@Setter
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@AllArgsConstructor
-public class Rule {
-    private AllowedInProperty petsAllowed;
-    private boolean cleaningCommonRooms;
-
-    private boolean cleaningPrivateRoom;
-
-    private AllowedInProperty playingMusicAllowed;
-
-    private AllowedInProperty smokingAllowed;
-
+public record Rule(
+        @NotNull
+        AllowedInProperty petsAllowed,
+        @NotNull
+        boolean cleaningCommonRooms,
+        @NotNull
+        boolean cleaningPrivateRoom,
+        @NotNull
+        AllowedInProperty playingMusicAllowed,
+        @NotNull
+        AllowedInProperty smokingAllowed) {
 }
+
