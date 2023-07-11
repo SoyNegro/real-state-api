@@ -4,7 +4,7 @@ import dev.coffecult.realstate.model.components.*;
 import dev.coffecult.realstate.model.enums.PropertyStatus;
 import dev.coffecult.realstate.model.enums.PropertyType;
 import dev.coffecult.realstate.model.enums.RentKind;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,39 +15,36 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Document
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 public class Listing {
     @Id
     private String id;
     @NotNull
     private Long userId;
-    @NotEmpty
-    private String listingNumber;
-    @NotEmpty
+    @NotBlank
     private String description;
 
-    private short minimumStayMonths;
+    private int minimumStayMonths;
 
-    private short maximumStayMonths;
+    private int maximumStayMonths;
+    
+    private int currentOccupancy;
 
-    private short moveInWindow = 0;
-
-    private short currentOccupancy = 0;
-    @NotEmpty
     private String alias;
-    @NotEmpty
+
     private List<String> galleryImagesUrl;
     @NotNull
     private Address address;
     @NotNull
     private Pricing pricing;
 
-    @NotEmpty
     private List<Cost> costs;
-    @NotNull
+
     private Facility facilities;
+
+    private Amenity amenities;
     @NotNull
     private PreferredTenant preferredTenant;
     @NotNull
@@ -63,5 +60,24 @@ public class Listing {
 
     private List<UnavailableDate> unavailableDates;
 
-
+    public Listing(Long userId, String description, int minimumStayMonths, int maximumStayMonths, int currentOccupancy, String alias, List<String> galleryImagesUrl, Address address, Pricing pricing, List<Cost> costs, Facility facilities, Amenity amenities, PreferredTenant preferredTenant, Rule rules, PropertyType propertyType, PropertyStatus propertyStatus, RentKind kindOfRent, List<UnavailableDate> unavailableDates) {
+        this.userId = userId;
+        this.description = description;
+        this.minimumStayMonths = minimumStayMonths;
+        this.maximumStayMonths = maximumStayMonths;
+        this.currentOccupancy = currentOccupancy;
+        this.alias = alias;
+        this.galleryImagesUrl = galleryImagesUrl;
+        this.address = address;
+        this.pricing = pricing;
+        this.costs = costs;
+        this.facilities = facilities;
+        this.amenities = amenities;
+        this.preferredTenant = preferredTenant;
+        this.rules = rules;
+        this.propertyType = propertyType;
+        this.propertyStatus = propertyStatus;
+        this.kindOfRent = kindOfRent;
+        this.unavailableDates = unavailableDates;
+    }
 }
