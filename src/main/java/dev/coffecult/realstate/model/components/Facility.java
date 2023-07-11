@@ -1,67 +1,26 @@
 package dev.coffecult.realstate.model.components;
 
-import dev.coffecult.realstate.model.enums.*;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import dev.coffecult.realstate.model.enums.AccessType;
+import dev.coffecult.realstate.model.enums.HousemateGender;
+import dev.coffecult.realstate.model.enums.SharingType;
+import dev.coffecult.realstate.model.enums.TenantStatus;
 
-@Getter
-@Setter
-public class Facility {
-    private boolean allergyFriendly;
-    private String housematesGender;
-
-    private TenantStatus tenantStatus;
-
-    private short freePlaces;
-
-    private short bedrooms;
-
-    private boolean bedroomFurnished;
-
-    private short bedroomSize;
-
-    private boolean bedroomLock;
-
-    private AccessType balconyTerrace;
-
-    private AccessType basement;
-
-    private SharingType bathroom;
-
-    private AccessType garden;
-
-    private AccessType livingRoom;
-
-    private AccessType parking;
-
-    private AccessType toilet;
-
-    private short totalSize;
-
-    private boolean wheelchairAccessible;
-
-    private boolean airConditioning;
-
-    private boolean bed;
-
-    private boolean closet;
-
-    private boolean dishwasher;
-
-    private boolean dryer;
-
-    private boolean internet;
-
-    private boolean roomFurniture;
-
-    private boolean tv;
-
-    private boolean washingMachine;
-
-    private FlooringType flooring;
-
-    private HeatingType heating;
-
-    private AccessType kitchenware;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public record Facility(
+        boolean allergyFriendly,
+        HousemateGender housematesGender,
+        TenantStatus tenantStatus,
+        short freePlaces,
+        short bedrooms,
+        short bedroomSize,
+        AccessType balconyTerrace,
+        AccessType basement,
+        SharingType bathroom,
+        AccessType garden,
+        AccessType livingRoom,
+        AccessType parking,
+        AccessType toilet,
+        short totalSize
+) {
 }
