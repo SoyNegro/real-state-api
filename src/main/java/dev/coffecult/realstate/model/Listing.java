@@ -1,6 +1,7 @@
 package dev.coffecult.realstate.model;
 
 import dev.coffecult.realstate.model.components.*;
+import dev.coffecult.realstate.model.enums.ListingState;
 import dev.coffecult.realstate.model.enums.PropertyStatus;
 import dev.coffecult.realstate.model.enums.PropertyType;
 import dev.coffecult.realstate.model.enums.RentKind;
@@ -26,10 +27,12 @@ public class Listing {
     @NotBlank
     private String description;
 
+    private ListingState state;
+
     private int minimumStayMonths;
 
     private int maximumStayMonths;
-    
+
     private int currentOccupancy;
 
     private String alias;
