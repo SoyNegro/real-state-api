@@ -40,7 +40,8 @@ public class ListingService {
     }
 
     public ResponseEntity<ListingResponse> createListing(ListingRequest listingRequest) {
-        return null;
+        var listing = listingRepository.save(listingRequest.toListing());
+        return new ResponseEntity<>(new ListingResponse(listing),HttpStatus.CREATED);
     }
 
     public ResponseEntity<ListingResponse> updateListing(String id, ListingRequest listingRequest) {
