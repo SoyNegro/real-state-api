@@ -35,17 +35,23 @@ public class ListingService {
 
     public ResponseEntity<ListingResponse> getListingById(String id) {
         return listingRepository.findById(id)
-                .map(listing -> new ResponseEntity<>(new ListingResponse(listing),HttpStatus.OK)).
-                orElseGet(()-> new ResponseEntity<>(HttpStatus.NOT_FOUND)) ;
+                .map(listing -> new ResponseEntity<>(new ListingResponse(listing), HttpStatus.OK)).
+                orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     public ResponseEntity<ListingResponse> createListing(ListingRequest listingRequest) {
         var listing = listingRepository.save(listingRequest.toListing());
-        return new ResponseEntity<>(new ListingResponse(listing),HttpStatus.CREATED);
+        return new ResponseEntity<>(new ListingResponse(listing), HttpStatus.CREATED);
     }
 
     public ResponseEntity<ListingResponse> updateListing(String id, ListingRequest listingRequest) {
-        return null;
+        if (!listingRepository.existsById(id)) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        var listing = listingRequest.toListing();
+        listing.setId(id);
+        var response = new ListingResponse(
+                listingRepository.save(listing)
+        );
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     public ResponseEntity<ListingResponse> deleteListing(String id) {
