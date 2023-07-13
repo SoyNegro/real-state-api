@@ -20,7 +20,7 @@ public record ListingResponse(String id,
                               int maximumStayMonths,
                               List<String> galleryImagesUrl,
                               List<UnavailableDate> unavailableDates) {
-    ListingResponse(Listing listing) {
+    public ListingResponse(Listing listing) {
         this(listing.getId(),
                 listing.getDescription(),
                 listing.getKindOfRent(),

@@ -42,7 +42,7 @@ public record ListingRequest(
         List<UnavailableDate> unavailableDates
 ) {
 
-    ListingRequest(
+   public ListingRequest(
             @NotNull
             Long userId,
             @NotEmpty
