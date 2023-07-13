@@ -83,4 +83,22 @@ public class Listing {
         this.kindOfRent = kindOfRent;
         this.unavailableDates = unavailableDates;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Listing listing = (Listing) o;
+
+        if (!id.equals(listing.getId())) return false;
+        return userId.equals(listing.getUserId());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + userId.hashCode();
+        return result;
+    }
 }
