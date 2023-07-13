@@ -15,10 +15,29 @@ import java.util.List;
 @RequestMapping("api")
 public class ListingController {
     private final ListingService listingService;
-    @GetMapping("listings")
-    public ResponseEntity<List<ListingResponse>> getListings(@RequestParam(defaultValue = "0") final int page,
-                                                             @RequestParam(defaultValue = "50") final int size) {
-        return listingService.getListingsByPage(page, size);
+
+    @GetMapping("listings/{countryCode}")
+    public ResponseEntity<List<ListingResponse>> getListingsByCountry(@RequestParam(defaultValue = "0") final int page,
+                                                                      @RequestParam(defaultValue = "50") final int size,
+                                                                      @PathVariable final String countryCode) {
+        return listingService.getListingsByCountry(countryCode, page, size);
+    }
+
+    @GetMapping("listings/{countryCode}/{city}")
+    public ResponseEntity<List<ListingResponse>> getListingsByCity(@RequestParam(defaultValue = "0") final int page,
+                                                                   @RequestParam(defaultValue = "50") final int size,
+                                                                   @PathVariable final String countryCode,
+                                                                   @PathVariable final String city) {
+        return listingService.getListingsByCity(countryCode, city, page, size);
+    }
+
+    @GetMapping("listings/{countryCode}/{city}/{neighborhood}")
+    public ResponseEntity<List<ListingResponse>> getListingsByNeighborhood(@RequestParam(defaultValue = "0") final int page,
+                                                                           @RequestParam(defaultValue = "50") final int size,
+                                                                           @PathVariable final String countryCode,
+                                                                           @PathVariable final String city,
+                                                                           @PathVariable final String neighborhood) {
+        return listingService.getListingsByNeighborhood(countryCode,city, neighborhood, page, size);
     }
 
     @GetMapping("listings/{id}")
