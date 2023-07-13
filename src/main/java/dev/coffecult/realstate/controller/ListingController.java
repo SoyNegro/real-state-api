@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
+@RestController
 @RequestMapping("api")
 public class ListingController {
     private final ListingService listingService;
-
     @GetMapping("listings")
     public ResponseEntity<List<ListingResponse>> getListings(@RequestParam(defaultValue = "0") final int page,
                                                              @RequestParam(defaultValue = "50") final int size) {
