@@ -55,7 +55,13 @@ public class ListingService {
     }
 
     public ResponseEntity<ListingResponse> deleteListing(String id) {
-        return null;
+        var listing = listingRepository.findById(id);
+        if (listing.isPresent()){
+            listingRepository.deleteById(id);
+            var response = new ListingResponse(listing.get());
+            return new ResponseEntity<>(response,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     public ResponseEntity<String> showListing(String id) {
