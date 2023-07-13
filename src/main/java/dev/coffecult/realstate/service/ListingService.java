@@ -1,14 +1,36 @@
 package dev.coffecult.realstate.service;
 
+import dev.coffecult.realstate.model.Listing;
 import dev.coffecult.realstate.model.dto.request.ListingRequest;
 import dev.coffecult.realstate.model.dto.response.ListingResponse;
+import dev.coffecult.realstate.repository.ListingRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
+@Service
 public class ListingService {
-    public ResponseEntity<List<ListingResponse>> getListingsByPage(int page, int size) {
-        return null;
+    final ListingRepository listingRepository;
+
+    public ResponseEntity<List<ListingResponse>> getListingsByCountry(String countryCode, int page, int size) {
+        var listings = listingRepository.findListingsByCountry(countryCode, PageRequest.of(page, size));
+        return getListResponse(listings);
+    }
+
+    public ResponseEntity<List<ListingResponse>> getListingsByCity(String countryCode, String city, int page, int size) {
+        var listings = listingRepository.findListingsByCity(countryCode, city, PageRequest.of(page, size));
+        return getListResponse(listings);
+    }
+
+    public ResponseEntity<List<ListingResponse>> getListingsByNeighborhood(String countryCode, String city, String neighborhood, int page, int size) {
+        var listings = listingRepository.findListingsByNeighborhood(countryCode, city, neighborhood, PageRequest.of(page, size));
+        return getListResponse(listings);
     }
 
     public ResponseEntity<ListingResponse> getListingById(String id) {
@@ -23,7 +45,6 @@ public class ListingService {
         return null;
     }
 
-
     public ResponseEntity<ListingResponse> deleteListing(String id) {
         return null;
     }
@@ -34,6 +55,14 @@ public class ListingService {
 
     public ResponseEntity<String> hideListing(String id) {
         return null;
+    }
+
+    private ResponseEntity<List<ListingResponse>> getListResponse(List<Listing> listings) {
+        if (listings.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        var response = new ArrayList<ListingResponse>();
+        listings.forEach(listing -> response.add(new ListingResponse(listing))
+        );
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }
