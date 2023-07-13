@@ -34,7 +34,9 @@ public class ListingService {
     }
 
     public ResponseEntity<ListingResponse> getListingById(String id) {
-        return null;
+        return listingRepository.findById(id)
+                .map(listing -> new ResponseEntity<>(new ListingResponse(listing),HttpStatus.OK)).
+                orElseGet(()-> new ResponseEntity<>(HttpStatus.NOT_FOUND)) ;
     }
 
     public ResponseEntity<ListingResponse> createListing(ListingRequest listingRequest) {
