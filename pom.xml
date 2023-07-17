@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>dev.coffecult</groupId>
 	<artifactId>realstate</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>RealState</name>
 	<description>Simple API for managing Listings</description>
 	<properties>
