@@ -9,7 +9,6 @@ import dev.coffecult.realstate.model.enums.RentKind;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,7 +56,7 @@ public record ListingRequest(
             PropertyStatus propertyStatus,
             @NotNull
             RentKind kindOfRent) {
-        this(userId, description, 1, 32000, 0, "", null, address, pricing, null, null, null, null, null, propertyType, propertyStatus, kindOfRent, new ArrayList<>());
+        this(userId, description, 1, 32000, 0, "", null, address, pricing, null, null, null, null, null, propertyType, propertyStatus, kindOfRent, null);
     }
 
     public Listing toListing() {
