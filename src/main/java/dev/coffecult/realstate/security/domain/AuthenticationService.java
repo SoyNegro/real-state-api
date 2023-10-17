@@ -14,11 +14,12 @@ public class AuthenticationService {
         this.apiKeyRepository = apiKeyRepository;
     }
 
-    public Authentication getAuthentication(HttpServletRequest request){
-        String apiKey = request.getHeader("Bearer");
-        if (apiKey==null || !apiKeyRepository.existsByKey(apiKey)){
+    public Authentication getAuthentication(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (bearerToken == null || bearerToken.isBlank() || !bearerToken.startsWith("Bearer ") || !apiKeyRepository.existsByKey(bearerToken.substring(7))) {
             throw new BadCredentialsException("Invalid API KEY");
         }
-        return new ApiKeyAuthentication(apiKey, AuthorityUtils.NO_AUTHORITIES);
+        return new ApiKeyAuthentication(bearerToken.substring(7), AuthorityUtils.NO_AUTHORITIES);
     }
 }
+
